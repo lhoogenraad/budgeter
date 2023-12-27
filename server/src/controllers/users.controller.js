@@ -12,6 +12,7 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
 	try{
+		console.log("login time")
 		let token = await users.login(req.body.email, req.body.password);
 		return res.status(200).json(token);
 	}catch(err){

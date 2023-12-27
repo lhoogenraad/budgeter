@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const db = require("./src/general/db")
+const token = require("./src/routes/middleware/token");
 const { returnError } = require("./src/routes/middleware/errorHandling/handler");
 
 global.BaseError = require("./src/routes/middleware/errorHandling/BaseError");
@@ -13,8 +14,8 @@ require("dotenv").config();
 const app = express();
 
 app.use(morgan('dev'));
-
 app.use(bodyParser.json());
+app.use(token);
 
 require("./src/routes")(app);
 
