@@ -1,4 +1,4 @@
-const { Client } = require("pg");
+const { Pool } = require("pg");
 require('dotenv').config();
 
 const dbConfig = {
@@ -7,9 +7,13 @@ const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    ssl: true,
+	ssl: false,
+    max: 40,
+    idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 20000,
+    allowExitOnIdle: true,
 }
 
-const client = new Client(dbConfig);
+const client = new Pool(dbConfig);
 
 module.exports = client;
