@@ -12,4 +12,4 @@ const dbConfig = {
 
 const client = new Client(dbConfig);
 
-export default client;
+module.exports = client;
