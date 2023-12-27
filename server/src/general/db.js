@@ -1,4 +1,5 @@
 const { Pool } = require("pg");
+const BaseError = require("../routes/middleware/errorHandling/BaseError");
 require('dotenv').config();
 
 const dbConfig = {
@@ -14,6 +15,18 @@ const dbConfig = {
     allowExitOnIdle: true,
 }
 
-const client = new Pool(dbConfig);
+const pool = new Pool(dbConfig);
 
-module.exports = client;
+const getPool = async () => {
+	try{
+		const connection = await pool.connect();
+		return connection;
+	}catch(err){
+		console.error(err);
+		throw new BaseError("DB connection error", 500, false, "Sorry, the database appears to be down.", true);
+	}
+}
+
+exports.pool = pool;
+
+exports.getPool = getPool;
