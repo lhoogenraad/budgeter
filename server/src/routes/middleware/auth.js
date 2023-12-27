@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
-const definedRoles = require("./roles");
 
+/*
+ * All this method really does is check that the format of the auth token is "Bearer <token>"
+ * and that the token is valid and hasn't expired yet.
+ */
 module.exports = () => {
 	return async (req, res, next) => {
 		//find JWT in headers
