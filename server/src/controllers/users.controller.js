@@ -20,11 +20,3 @@ exports.login = async (req, res, next) => {
 };
 
 
-exports.getAllUsers = async (req, res, next) => {
-	try{
-		let userList = await users.getAllUsers();
-		return res.status(200).json(userList);
-	}catch(err){
-		next(err);
-	}
-};
