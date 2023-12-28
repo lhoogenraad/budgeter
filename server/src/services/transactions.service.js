@@ -28,9 +28,9 @@ exports.createTransaction = async (accountId, { name, amount, timestamp }, email
 	let placeholders = [email, accountId, name, amount, timestamp];
 	let insertQuery = `INSERT INTO budgeter.transactions (user_id, account_id, name, amount, timestamp)
 	VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-	
+	let transaction;
 	try{
-	let transaction = (await conn.query(insertQuery, placeholders)).rows[0];
+		transaction = (await conn.query(insertQuery, placeholders)).rows[0];
 	}catch(err){
 		if(err.constraint == 'account_fkey'){
 			throw new BaseError("Transaction account fkey failure", 404, true, 

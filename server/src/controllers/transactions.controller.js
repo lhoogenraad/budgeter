@@ -24,6 +24,9 @@ exports.getAccountTransactions = async (req, res, next) => {
 
 exports.createTransaction = async (req, res, next) => {
 	try{
+		if(req.body.amount == 0){
+			throw new BaseError("Invalid transaction amount", 400, true, "Sorry, the transaction amount cannot be 0.");
+		}
 		const transaction = await transactionService.createTransaction(req.params.accountId, req.body, req.tokenfields.email);
 		return res.status(201).json(transaction)
 	}catch(err){
