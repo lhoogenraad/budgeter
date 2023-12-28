@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import api from '../services/api';
+import Button from '@mui/material/Button/Button';
+import notify from '../notify';
 
 class Login extends Component {
 	state = {
 		username: 'le.o.n@outlook.com',
-		password: '',
+		password: 'password',
 		authToken: '',
 	}
+	
 
-	componentDidMount(){
+	signIn = () => {
 		api.users.login(this.state.username, this.state.password)
-		.then((res) => this.state.authToken = res.data)
-		.catch((err) => console.log(err));
+		.then((res) => sessionStorage.setItem("accessToken", res.data))
+		.catch((err) => console.error(err));
 	}
 
 	render() {
@@ -20,6 +23,7 @@ class Login extends Component {
 			<h1>Login</h1>
 			<div>{this.state.username} <br/> {this.state.password}</div>
 			<p>Auth token: {this.state.authToken}</p>
+			<Button variant="contained" onClick={() => this.signIn()}>Login</Button>
 			</div>
 		)
 	}
