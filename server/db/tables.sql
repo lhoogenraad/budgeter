@@ -9,7 +9,7 @@ create table budgeter.accounts (
 	name varchar not null,
 	user_id varchar not null,
 
-	constraint users_fkey foreign key (user_id) references budgeter.users
+	constraint users_fkey foreign key (user_id) references budgeter.users on delete cascade
 );
 
 create table budgeter.transactions (
