@@ -6,7 +6,7 @@ const parse = (req, res, next) => {
 		req.tokenfields = tokenFields;
 	}
 
-	next();
+	return next();
 };
 
 module.exports = parse;

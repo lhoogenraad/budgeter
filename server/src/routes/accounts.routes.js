@@ -5,17 +5,17 @@ const { Router } = require("express");
 const router = Router();
 
 // Get all accounts of user making request
-router.get("/api/accounts", auth, accountController.getAccounts);
+router.get("/api/accounts", auth(), accountController.getAccounts);
 
 
 // Create a new account
-router.post("/api/accounts", auth, accountController.createAccount);
+router.post("/api/accounts", auth(), accountController.createAccount);
 
 // Update an account
-router.patch("/api/accounts/:id", auth, accountController.updateAccount);
+router.patch("/api/accounts/:id", auth(), accountController.updateAccount);
 
 // Delete an account
-router.delete("/api/accounts/:id", auth, accountController.deleteAccount);
+router.delete("/api/accounts/:id", auth(), accountController.deleteAccount);
 
 
 

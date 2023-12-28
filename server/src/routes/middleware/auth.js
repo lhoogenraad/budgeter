@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 /*
  * All this method really does is check that the format of the auth token is "Bearer <token>"
@@ -20,7 +21,7 @@ module.exports = () => {
 		const tokenBody = token.slice(7);
 
 		try {
-			decoded = jwt.verify(tokenBody, process.env.JWT_SECRET);
+			decoded = jwt.verify(tokenBody, process.env.SECRET);
 		} catch (error) {
 			return res.status(401).send("Access denied: Unable to verify token.");
 		}
