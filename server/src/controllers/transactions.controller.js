@@ -12,9 +12,19 @@ exports.getTransactions = async (req, res, next) => {
 };
 
 
+exports.getAccountTransactions = async (req, res, next) => {
+	try{
+		const transactions = await transactionService.getAccountTransactions(req.params.accountId, req.tokenfields.email);
+		return res.status(200).json(transactions);
+	}catch(err){
+		next(err);
+	}
+};
+
+
 exports.createTransaction = async (req, res, next) => {
 	try{
-		const transaction = await transactionService.createTransaction(req.body, req.tokenfields.email);
+		const transaction = await transactionService.createTransaction(req.params.accountId, req.body, req.tokenfields.email);
 		return res.status(201).json(transaction)
 	}catch(err){
 		next(err);
@@ -24,7 +34,7 @@ exports.createTransaction = async (req, res, next) => {
 
 exports.updateTransaction = async (req, res, next) => {
 	try{
-		const transaction = await transactionService.updateTransaction(req.params.id, req.body, req.tokenfields.email);
+		const transaction = await transactionService.updateTransaction(req.params.accountId, req.params.id, req.body, req.tokenfields.email);
 		return res.status(200).json(transaction)
 	}catch(err){
 		next(err);
@@ -34,7 +44,7 @@ exports.updateTransaction = async (req, res, next) => {
 
 exports.deleteTransaction = async (req, res, next) => {
 	try{
-		const transaction = await transactionService.deleteTransaction(req.params.id, req.body, req.tokenfields.email);
+		const transaction = await transactionService.deleteTransaction(req.params.accountId, req.params.id, req.tokenfields.email);
 		return res.status(201).json(transaction)
 	}catch(err){
 		next(err);

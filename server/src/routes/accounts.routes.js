@@ -7,6 +7,8 @@ const router = Router();
 // Get all accounts of user making request
 router.get("/api/accounts", auth(), accountController.getAccounts);
 
+// Gets account balance
+router.get("/api/accounts/:id/balance", auth(), accountController.getAccountBalance);
 
 // Create a new account
 router.post("/api/accounts", auth(), accountController.createAccount);

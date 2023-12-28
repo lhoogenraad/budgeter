@@ -11,6 +11,15 @@ exports.getAccounts = async (req, res, next) => {
 };
 
 
+exports.getAccountBalance = async (req, res, next) => {
+	try{
+		const balance = await accountService.getAccountBalance(req.tokenfields.email, req.params.id);
+		return res.status(200).json(balance);
+	}catch(err){
+		next(err);
+	}
+};
+
 exports.createAccount = async (req, res, next) => {
 	try{
 		const account = await accountService.createAccount(req.body, req.tokenfields.email);

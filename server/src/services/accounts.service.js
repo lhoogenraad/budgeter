@@ -16,6 +16,32 @@ exports.getAccounts = async (email) => {
 	}
 };
 
+/**
+ * Calculates account balance 
+ */
+exports.getAccountBalance = async (email, accountId) => {
+	const conn = await getPool();
+	try{
+		const amountRes = await conn.query(`
+			SELECT COALESCE(SUM(amount), 0) as total FROM budgeter.transactions 
+			WHERE user_id=$1
+			AND account_id=$2
+			AND timestamp <= now()
+			`, [email, accountId]);
+		if(amountRes.rowCount < 1){
+			throw new BaseError("Account not found", 404, true, 
+				"Sorry, couldn't calculate balance for this account.");
+		}
+
+		return amountRes.rows[0].total;
+	}catch(err){
+		console.error(err);
+		throw err;
+	}finally{
+		conn.release();
+	}
+};
+
 
 /**
  * Creates a new account registered under the user making the request

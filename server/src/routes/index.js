@@ -2,5 +2,6 @@
 module.exports = (app) => {
 	app.use(require('./users.routes'));
 	app.use(require('./accounts.routes'));
+	app.use(require('./transactions.routes'));
 };
 	

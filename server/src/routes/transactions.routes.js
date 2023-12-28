@@ -8,16 +8,16 @@ const router = Router();
 router.get("/api/transactions", auth(), transactionController.getTransactions);
 
 // Get all transactions of an account
-router.get("/api/accounts/:id/transactions", auth, transactionController.getAccountTransactions);
+router.get("/api/accounts/:accountId/transactions", auth(), transactionController.getAccountTransactions);
 
 // Create a new transaction under a given account id
-router.post("/api/accounts/:id/transaction", auth(), transactionController.createTransaction);
+router.post("/api/accounts/:accountId/transactions", auth(), transactionController.createTransaction);
 
 // Update an transaction
-router.patch("/api/transactions/:id", auth(), transactionController.updateTransaction);
+router.patch("/api/accounts/:accountId/transactions/:id", auth(), transactionController.updateTransaction);
 
 // Delete an transaction
-router.delete("/api/transactions/:id", auth(), transactionController.deleteTransaction);
+router.delete("/api/accounts/:accountId/transactions/:id", auth(), transactionController.deleteTransaction);
 
 
 

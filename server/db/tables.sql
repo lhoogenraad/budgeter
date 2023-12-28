@@ -14,9 +14,11 @@ create table budgeter.accounts (
 
 create table budgeter.transactions (
 	id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 99999999 CACHE 1 ),
+	name varchar,
 	amount numeric not null,
 	user_id varchar not null,
 	account_id bigint not null,
+	"timestamp" timestamp not null default now(),
 
 	constraint account_fkey foreign key (account_id) references budgeter.accounts on delete cascade,
 	constraint users_fkey foreign key (user_id) references budgeter.users on delete cascade

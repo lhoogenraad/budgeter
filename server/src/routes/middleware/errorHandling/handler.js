@@ -2,6 +2,8 @@ require("dotenv").config();
 
 // Returns error to the express request. Also notifies if 
 function returnError (err, req, res, next) {
+	// Log error for server logs
+	console.error(err);
 	// Check if err is instance of our defined BaseError and that error actually exists.
 	if(err instanceof BaseError && err){
 		handleCriticalError(err);
