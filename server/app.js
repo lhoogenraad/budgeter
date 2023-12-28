@@ -10,7 +10,7 @@ const { returnError } = require("./src/routes/middleware/errorHandling/handler")
 global.BaseError = require("./src/routes/middleware/errorHandling/BaseError");
 
 require("dotenv").config();
-const cors_origin = `http://localhost:3030`
+const cors_origin = `http://localhost:3001`
 const app = express();
 
 app.use(morgan('dev'));

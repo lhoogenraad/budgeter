@@ -6,17 +6,11 @@ function returnError (err, req, res, next) {
 	console.error(err);
 	// Check if err is instance of our defined BaseError and that error actually exists.
 	if(err instanceof BaseError && err){
-		handleCriticalError(err);
 		return res.status(err.statusCode || 500).json(err.description);
 	}else{
 		/* In here we could also json an email to our greenhalo support inbox or something */
 		return res.status(500).json(`Internal server error. Please try again later`);
 	}
-}
-
-function handleCriticalError (err) {
-	console.error(`Holy moly something has gone terribly wrong. This critical error handler should probably 
-		have some key email contacts to notify of these errors...`);
 }
 
 // Refer to the single line of code below
