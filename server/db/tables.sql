@@ -18,6 +18,6 @@ create table budgeter.transactions (
 	user_id varchar not null,
 	account_id bigint not null,
 
-	constraint account_fkey foreign key (account_id) references budgeter.accounts,
-	constraint users_fkey foreign key (user_id) references budgeter.users
+	constraint account_fkey foreign key (account_id) references budgeter.accounts on delete cascade,
+	constraint users_fkey foreign key (user_id) references budgeter.users on delete cascade
 );
